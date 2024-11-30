@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>АвтоМаджонг</title>
+    <link rel="icon" href="iconn.png" type="image/png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Parkinsans:wght@300..800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <script defer src="app.js"></script>
+</head>
+<body>
+    
+    <section class="hidden">
+        <h1><img src="name.png" alt="Логотип Маджонга"></h1>
+        <p>Автомобильные логотипы</p>
+        <div class="auth-links">
+            <a href="signin.html">Вход</a>
+            <a href="signup.html">Регистрация</a>
+        </div>
+    </section>
+
+
+    <section class="hidden">
+        <div class="rule">
+            <h2><a id="show-rules" href="#">Правила игры</a></h2> 
+        </div>
+        <div id="rules-popup" class="rules-popup hidden">
+            <div class="popup-content">
+                <h3>Правила:</h3>
+                <p>Маджонг — игра, в которой игроки должны искать пары одинаковых карточек с автомобильными марками. Карточки можно удалить, если они не заблокированы другими с обеих сторон. Цель — очистить поле, соблюдая это правило.</p>
+                <button id="close-popup">Закрыть</button>
+            </div>
+        </div>
+        <h2>3 уровня сложности</h2>
+        <div class="topics">
+            <ul class="topic-list">
+                <h2><li><a href="#" id="show-brands-btn">3 темы</a></li></h2>
+            </ul>
+        </div>
+    </section>
+    
+
+    <section class="hidden">
+        <h2>Соревнуйся с друзьями</h2>
+        <div class="auth-links">
+            <p>отслеживай свои результаты в  
+                <a id="rating" href="rating.html">рейтинговой таблице</a> и соревнуйся с друзьями
+            </p>
+        </div>
+    </section>
+
+    <section class="hidden">
+        <h2>Авторы проекта</h2>
+        <div class="logos">
+            <div class="logo hidden">
+                <img src="img/sveta.png" alt="">
+                <div class="name1">
+                    <h1><a href="https://github.com/hlopushkaa">svetlana</a></h1>
+                </div>         
+            </div>
+            <div class="logo hidden">
+                <img src="img/alex.png" alt="">
+                <div class="name1">
+                    <h1><a href="https://github.com/ZolotarevAlexandr">alexandr</a></h1>
+                </div>
+            </div>
+            <div class="logo hidden">
+                <img src="img/julia.png" alt="">
+                <div class="name2">
+                    <h1><a href="https://github.com/Yameteshka">julia</a></h1>
+                </div>
+            </div>
+            <div class="logo hidden">
+                <img src="img/ivan.png" alt="">
+                <div class="name2">
+                    <h1><a href="https://github.com/Gn1daa">ivan</a></h1>
+                </div>
+            </div>
+        </div>
+    </section>
+
+        <main>
+            <div class="content">
+                <div class="right-section" id="right-section">
+                    <div class="car-brands" id="all-brands">
+                        <h2>Электро</h2>
+                        <a href="#" class="brand" data-brand="aito">
+                            <div class="image-container">
+                                <div class="front">
+                                    <img src="электрокары/aito.png" alt="Aito">
+                                </div>
+                                <div class="back">
+                                    <p>Aito</p>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#" class="brand" data-brand="atom">
+                            <div class="image-container">
+                                <div class="front">
+                                    <img src="электрокары/atom.png" alt="Atom">
+                                </div>
+                                <div class="back">
+                                    <p>Atom</p>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#" class="brand" data-brand="audi">
+                            <div class="image-container">
+                                <div class="front">
+                                    <img src="электрокары/audi.png" alt="Audi">
+                                </div>
+                                <div class="back">
+                                    <p>Audi</p>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#" class="brand" data-brand="bmw">
+                            <div class="image-container">
+                                <div class="front">
+                                    <img src="электрокары/bmw.png" alt="BMW">
+                                </div>
+                                <div class="back">
+                                    <p>BMX</p>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#" class="brand" data-brand="citroen">
+                            <div class="image-container">
+                                <div class="front">
+                                    <img src="электрокары/citroen.png" alt="Citroen">
+                                </div>
+                                <div class="back">
+                                    <p>Citroen</p>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#" class="brand" data-brand="jaguar">
+                            <div class="image-container">
+                                <div class="front">
+                                    <img src="электрокары/jaguar.png" alt="Jaguar">
+                                </div>
+                                <div class="back">
+                                    <p>Jaguar</p>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#" class="brand" data-brand="lada">
+                            <div class="image-container">
+                                <div class="front">
+                                    <img src="электрокары/lada.png" alt="lada">
+                                </div>
+                                <div class="back">
+                                    <p>Lada</p>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#" class="brand" data-brand="mitsubishi">
+                            <div class="image-container">
+                                <div class="front">
+                                    <img src="электрокары/mitsubishi.png" alt="Mitsubishi">
+                                </div>
+                                <div class="back">
+                                    <p>Mitsubishi</p>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#" class="brand" data-brand="nissan">
+                            <div class="image-container">
+                                <div class="front">
+                                    <img src="электрокары/nissan.png" alt="nissan">
+                                </div>
+                                <div class="back">
+                                    <p>nissan</p>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#" class="brand" data-brand="peugeot">
+                            <div class="image-container">
+                                <div class="front">
+                                    <img src="электрокары/peugeot.png" alt="Peugeot">
+                                </div>
+                                <div class="back">
+                                    <p>Peugeot</p>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#" class="brand" data-brand="porsche">
+                            <div class="image-container">
+                                <div class="front">
+                                    <img src="электрокары/porsche.png" alt="Porsche">
+                                </div>
+                                <div class="back">
+                                    <p>Porsche</p>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#" class="brand" data-brand="renault">
+                            <div class="image-container">
+                                <div class="front">
+                                    <img src="электрокары/renault.png" alt="Renault">
+                                </div>
+                                <div class="back">
+                                    <p>Renault</p>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#" class="brand" data-brand="smart">
+                            <div class="image-container">
+                                <div class="front">
+                                    <img src="электрокары/smart.png" alt="Smart">
+                                </div>
+                                <div class="back">
+                                    <p>Smart</p>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#" class="brand" data-brand="tesla">
+                            <div class="image-container">
+                                <div class="front">
+                                    <img src="электрокары/tesla.png" alt="Tesla">
+                                </div>
+                                <div class="back">
+                                    <p>Tesla</p>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#" class="brand" data-brand="toyota">
+                            <div class="image-container">
+                                <div class="front">
+                                    <img src="электрокары/toyota.png" alt="Toyota">
+                                </div>
+                                <div class="back">
+                                    <p>Toyota</p>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#" class="brand" data-brand="byd">
+                            <div class="image-container">
+                                <div class="front">
+                                    <img src="электрокары/BYD.png" alt="BYD">
+                                </div>
+                                <div class="back">
+                                    <p>BYD</p>
+                                </div>
+                            </div>
+                        </a>
+
+                        <h2>Все</h2>
+                        <a href="#" class="brand" data-brand="audi">
+                            <div class="image-container">
+                                <div class="front">
+                                    <img src="лого/audi.png" alt="Audi">
+                                </div>
+                                <div class="back">
+                                    <p>Audi</p>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#" class="brand" data-brand="bmw">
+                            <div class="image-container">
+                                <div class="front">
+                                    <img src="лого/bmw.png" alt="BMW">
+                                </div>
+                                <div class="back">
+                                    <p>BMW</p>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#" class="brand" data-brand="chevrolet">
+                            <div class="image-container">
+                                <div class="front">
+                                    <img src="лого/chevrolet.png" alt="Chevrolet">
+                                </div>
+                                <div class="back">
+                                    <p>Chevrolet</p>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#" class="brand" data-brand="citroen">
+                            <div class="image-container">
+                                <div class="front">
+                                    <img src="лого/citroen.png" alt="Citroen">
+                                </div>
+                                <div class="back">
+                                    <p>Citroen</p>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#" class="brand" data-brand="honda">
+                            <div class="image-container">
+                                <div class="front">
+                                    <img src="лого/honda.png" alt="Honda">
+                                </div>
+                                <div class="back">
+                                    <p>Honda</p>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#" class="brand" data-brand="infiniti">
+                            <div class="image-container">
+                                <div class="front">
+                                    <img src="лого/infinity.png" alt="Infiniti">
+                                </div>
+                                <div class="back">
+                                    <p>Infinity</p>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#" class="brand" data-brand="jaguar">
+                            <div class="image-container">
+                                <div class="front">
+                                    <img src="лого/jaguar.png" alt="Jaguar">
+                                </div>
+                                <div class="back">
+                                    <p>Jaguar</p>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#" class="brand" data-brand="lexus">
+                            <div class="image-container">
+                                <div class="front">
+                                    <img src="лого/lexus.png" alt="Lexus">
+                                </div>
+                                <div class="back">
+                                    <p>Lexus</p>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#" class="brand" data-brand="maserati">
+                            <div class="image-container">
+                                <div class="front">
+                                    <img src="лого/maswratti.png" alt="Maserati">
+                                </div>
+                                <div class="back">
+                                    <p>Maseratti</p>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#" class="brand" data-brand="maybach">
+                            <div class="image-container">
+                                <div class="front">
+                                    <img src="лого/maybach.png" alt="Maybach">
+                                </div>
+                                <div class="back">
+                                    <p>Maybach</p>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#" class="brand" data-brand="mazda">
+                            <div class="image-container">
+                                <div class="front">
+                                    <img src="лого/mazda.png" alt="Mazda">
+                                </div>
+                                <div class="back">
+                                    <p>Mazda</p>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#" class="brand" data-brand="mercedes">
+                            <div class="image-container">
+                                <div class="front">
+                                    <img src="лого/merc.png" alt="mercedes">
+                                </div>
+                                <div class="back">
+                                    <p>Mercedes</p>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#" class="brand" data-brand="mitsubishi">
+                            <div class="image-container">
+                                <div class="front">
+                                    <img src="лого/mitsubishi.png" alt="Mitsubishi">
+                                </div>
+                                <div class="back">
+                                    <p>Mitsubishi</p>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#" class="brand" data-brand="volkswagen">
+                            <div class="image-container">
+                                <div class="front">
+                                    <img src="лого/voltsvagen.png" alt="Volkswagen">
+                                </div>
+                                <div class="back">
+                                    <p>Volkswagen</p>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#" class="brand" data-brand="fiat">
+                            <div class="image-container">
+                                <div class="front">
+                                    <img src="лого/fiat.png" alt="Fiat">
+                                </div>
+                                <div class="back">
+                                    <p>Fiat</p>
+                                </div>
+                            </div>
+                        </a>
+
+                        <a href="#" class="brand" data-brand="mini">
+                            <div class="image-container">
+                                <div class="front">
+                                    <img src="лого/mini.png" alt="Mini">
+                                </div>
+                                <div class="back">
+                                    <p>Mini</p>
+                                </div>
+                            </div>
+                        </a>
+
+                        <h2>Ретро</h2>
+                        <a href="#" class="brand" data-brand="bugatti">
+                            <div class="image-container">
+                                <div class="front">
+                                    <img src="ретро/bugatti.png" alt="Bugatti">
+                                </div>
+                                <div class="back">
+                                    <p>Bugatti</p>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#" class="brand" data-brand="charger">
+                            <div class="image-container">
+                                <div class="front">
+                                    <img src="ретро/charger.png" alt="Charger">
+                                </div>
+                                <div class="back">
+                                    <p>Charger</p>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#" class="brand" data-brand="chevrolet">
+                            <div class="image-container">
+                                <div class="front">
+                                    <img src="ретро/chevrolet.png" alt="Chevrolet">
+                                </div>
+                                <div class="back">
+                                    <p>Chevrolet</p>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#" class="brand" data-brand="chrysler">
+                            <div class="image-container">
+                                <div class="front">
+                                    <img src="ретро/chrysler.png" alt="Chrysler">
+                                </div>
+                                <div class="back">
+                                    <p>Chrysler</p>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#" class="brand" data-brand="delahaye">
+                            <div class="image-container">
+                                <div class="front">
+                                    <img src="ретро/delahaye.png" alt="Delahaye">
+                                </div>
+                                <div class="back">
+                                    <p>Delahaye</p>
+                                </div>
+                            </div>
+                        </a>
+
+                        <a href="#" class="brand" data-brand="horch">
+                            <div class="image-container">
+                                <div class="front">
+                                    <img src="ретро/horch.png" alt="Horch">
+                                </div>
+                                <div class="back">
+                                    <p>Horch</p>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#" class="brand" data-brand="jensen">
+                            <div class="image-container">
+                                <div class="front">
+                                    <img src="ретро/jensen.png" alt="Jensen">
+                                </div>
+                                <div class="back">
+                                    <p>Jensen</p>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#" class="brand" data-brand="mercedesBenz">
+                            <div class="image-container">
+                                <div class="front">
+                                    <img src="ретро/merc_benz.png" alt="MercedesBenz">
+                                </div>
+                                <div class="back">
+                                    <p>Mercedec Benz</p>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#" class="brand" data-brand="mustang">
+                            <div class="image-container">
+                                <div class="front">
+                                    <img src="ретро/mustang.png" alt="Mustang">
+                                </div>
+                                <div class="back">
+                                    <p>Mustang</p>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#" class="brand" data-brand="oldsmobile">
+                            <div class="image-container">
+                                <div class="front">
+                                    <img src="ретро/oldsmobile.png" alt="Oldsmobile">
+                                </div>
+                                <div class="back">
+                                    <p>Oldsmobile</p>
+                                </div>
+                            </div>
+                        </a>
+
+                        <a href="#" class="brand" data-brand="packard">
+                            <div class="image-container">
+                                <div class="front">
+                                    <img src="ретро/packard.png" alt="Packard">
+                                </div>
+                                <div class="back">
+                                    <p>Packard</p>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#" class="brand" data-brand="rollsRoyce">
+                            <div class="image-container">
+                                <div class="front">
+                                    <img src="ретро/rr.png" alt="RR">
+                                </div>
+                                <div class="back">
+                                    <p>Rolls royce</p>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#" class="brand" data-brand="dodgeRT">
+                            <div class="image-container">
+                                <div class="front">
+                                    <img src="ретро/rt.png" alt="DodgeRT">
+                                </div>
+                                <div class="back">
+                                    <p>Dodge R/T</p>
+                                </div>
+                            </div>
+                        </a>
+
+                        <a href="#" class="brand" data-brand="saab">
+                            <div class="image-container">
+                                <div class="front">
+                                    <img src="ретро/saab.png" alt="Saab">
+                                </div>
+                                <div class="back">
+                                    <p>Saab</p>
+                                </div>
+                            </div>
+                        </a>
+
+                        <a href="#" class="brand" data-brand="thunderbird">
+                            <div class="image-container">
+                                <div class="front">
+                                    <img src="ретро/thunderbird.png" alt="Thunderbird">
+                                </div>
+                                <div class="back">
+                                    <p>Thunderbird</p>
+                                </div>
+                            </div>
+                        </a>
+
+                        <a href="#" class="brand" data-brand="hanomag">
+                            <div class="image-container">
+                                <div class="front">
+                                    <img src="ретро/hanomag.png" alt="Hanomag">
+                                </div>
+                                <div class="back">
+                                    <p>Hanomag</p>
+                                </div>
+                            </div>
+                        </a>
+
+                    </div>
+
+
+                    
+                </div>
+            </div>
+        </main>
+
+    <script>
+        const showBrandsBtn = document.getElementById('show-brands-btn');
+        const rightSection = document.getElementById('right-section');
+         
+
+        showBrandsBtn.addEventListener('click', function(e) {
+            e.stopPropagation(); 
+            rightSection.classList.toggle('visible');
+        });
+
+        rightSection.addEventListener('click', function(e) {
+            e.stopPropagation();
+        });
+
+        closeBtn.addEventListener('click', function() {
+        rightSection.classList.remove('visible');
+    });
+    </script>
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <p id="brand-description"></p>
+        </div>
+    </div>
+
+</body>
+</html>

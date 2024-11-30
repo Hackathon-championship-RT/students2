@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="iconn.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <title>АвтоМаджонг</title>
+</head>
+<body>
+    <header>
+        <!-- Кнопка "Марки авто" в правом верхнем углу -->
+        <button class="brands-btn" id="brands-btn">Марки автомобилей</button>
+    </header>
+    <main>
+        <div class="content">
+            <div class="left-section">
+                <!-- В левой секции ничего не меняем -->
+                <button class="username-btn" id="username-btn">{username}</button>
+            </div>
+            <div class="right-section" id="right-section">
+                <div class="car-brands">
+                    <a href="brand1.html"><img src="лого/audi.png" alt="Audi"></a>
+                    <a href="brand2.html"><img src="лого/bmw.png" alt="BMW"></a>
+                    <a href="brand3.html"><img src="лого/chevrolet.png" alt="Chevrolet"></a>
+                    <a href="brand4.html"><img src="лого/citroen.png" alt="Citroen"></a>
+                    <a href="brand5.html"><img src="лого/honda.png" alt="Honda"></a>
+                    <a href="brand6.html"><img src="лого/infinity.png" alt="Infinity"></a>
+                    <a href="brand7.html"><img src="лого/jaguar.png" alt="Jaguar"></a>
+                    <a href="brand8.html"><img src="лого/lexus.png" alt="Lexus"></a>
+                    <a href="brand9.html"><img src="лого/maswratti.png" alt="Maswratti"></a>
+                    <a href="brand10.html"><img src="лого/maybach.png" alt="Maybach"></a>
+                    <a href="brand11.html"><img src="лого/mazda.png" alt="Mazda"></a>
+                    <a href="brand12.html"><img src="лого/merc.png" alt="Merc"></a>
+                    <a href="brand13.html"><img src="лого/mitsubishi.png" alt="Mitsubishi"></a>
+                    <a href="brand14.html"><img src="лого/voltsvagen.png" alt="oltsvagen"></a>
+                    <a href="brand15.html"><img src="лого/fiat.png" alt="Fiat"></a>
+                    <!-- Добавьте сюда дополнительные марки -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Получаем кнопку и правую секцию
+        const brandsBtn = document.getElementById('brands-btn');
+        const rightSection = document.getElementById('right-section');
+        
+        // Функция для показа правой секции
+        brandsBtn.addEventListener('click', function(e) {
+            e.stopPropagation(); // Останавливаем всплытие события, чтобы клик не сработал на body
+            rightSection.classList.toggle('visible');
+        });
+
+        // Функция для скрытия правой секции при клике вне её и кнопки
+        document.body.addEventListener('click', function(e) {
+            if (!rightSection.contains(e.target) && e.target !== brandsBtn) {
+                rightSection.classList.remove('visible');
+            }
+        });
+
+        // Останавливаем клик на самой правой секции, чтобы она не скрывалась
+        rightSection.addEventListener('click', function(e) {
+            e.stopPropagation();
+        });
+    </script>
+</body>
+</html>
