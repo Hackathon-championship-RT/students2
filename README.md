@@ -5,7 +5,7 @@
 + Pick between retro/electric/all cars
 + Pick between different difficulty levels
 + See results on the leaderboard
-+ See short description of car brands
++ See short description of car brands (In progress)
 
 ## Technologies:
 + Python 3.12, Poetry
@@ -49,9 +49,9 @@ docker-compose -f docker-compose.local.yaml up
     poetry run python src/api/webserver.py
     ```
 
-
-
 ### Locally via make:
 ```bash
 make start
 ```
+
+To run from Docker set `POSTGRES_HOST = postgres`, `localhost` otherwise

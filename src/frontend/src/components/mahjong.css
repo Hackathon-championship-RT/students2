@@ -1,0 +1,147 @@
+/* Основной контейнер для доски */
+.mahjong-board {
+  position: relative; /* Контейнер для абсолютного позиционирования слоев */
+  width: 80%; /* Ширина доски */
+  height: 80%; /* Высота доски */
+  margin: 50px auto; /* Центрируем доску по экрану */
+  display: flex;
+  justify-content: center; /* Центрируем по горизонтали */
+  align-items: center; /* Центрируем по вертикали */
+}
+
+/* Общий стиль слоев */
+.mahjong-layer {
+  position: absolute; /* Слои накладываются друг на друга */
+  width: 15%; /* Уменьшаем размер слоя */
+  height: 15%; /* Уменьшаем размер слоя */
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); /* Адаптивное количество колонок */
+  gap: 30px; /* Расстояние между карточками */
+  justify-items: center; /* Центрируем карточки внутри слоя */
+  align-items: center; /* Центрируем карточки внутри слоя */
+}
+
+/* Смещение слоев */
+.mahjong-layer:nth-child(1) {
+  z-index: 1;
+  transform: translate(0, 0);
+}
+
+.mahjong-layer:nth-child(2) {
+  z-index: 2;
+  transform: translate(-10px, -10px); /* Смещаем слой чуть вниз и вправо */
+}
+
+.mahjong-layer:nth-child(3) {
+  z-index: 3;
+  transform: translate(-20px, -20px); /* Сильнее смещаем слой */
+}
+
+.mahjong-layer:nth-child(4) {
+  z-index: 4;
+  transform: translate(-30px, -30px); /* Еще сильнее смещаем */
+}
+
+.mahjong-layer:nth-child(5) {
+  z-index: 5;
+  transform: translate(-40px, -40px);
+}
+
+/* Стиль карточек */
+.card {
+  pointer-events: auto;
+  width: 80%;  /* Уменьшаем размер карточки */
+  aspect-ratio: 1; /* Карточки остаются квадратными */
+  background: linear-gradient(145deg, #3a3a3a, #4f4f4f); /* Темный градиент */
+  border: 1px solid #333; /* Легкая обводка */
+  border-radius: 8px; /* Закругленные углы */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5), 0 2px 4px rgba(0, 0, 0, 0.3); /* Глубокие тени */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.3s ease;
+}
+
+.card:hover {
+  transform: scale(1.1); /* Легкое увеличение при наведении */
+  background: linear-gradient(145deg, #4f4f4f, #5c5c5c); /* Изменение цвета */
+}
+
+/* Анимация при выборе */
+.card.selected {
+  border: 3px solid #ff9900; /* Подсветка выбора */
+  animation: shake 0.3s ease-in-out;
+}
+
+/* Анимация дрожания */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-2px); }
+  50% { transform: translateX(2px); }
+  75% { transform: translateX(-2px); }
+}
+
+/* Изображение на карточке */
+.card img {
+  width: 100%; /* Размер изображения */
+  height: 100%;
+  object-fit: contain; /* Чтобы изображение не искажалось */
+  border-radius: 5px;
+}
+
+/* Скрытые карточки */
+.hidden {
+  visibility: hidden;
+  opacity: 0;
+}
+
+/* Стили для счета */
+.coins {
+  font-size: 24px;
+  color: gold; /* Красивый цвет для счета */
+  font-family: 'Arial', sans-serif; /* Устанавливаем шрифт */
+  font-weight: bold; /* Делаем текст жирным */
+  margin-right: 10px;
+  margin-top: 20px; /* Добавляем небольшой отступ снизу */
+}
+
+/* Новый стиль для кнопки микс */
+.mix-button {
+  background: linear-gradient(145deg, #ffe206, #60470a); /* Градиентный фон */
+  color: white;
+  padding: 12px 24px; /* Больше отступов для приятного размера */
+  border: none;
+  border-radius: 25px; /* Полукруглая форма */
+  font-size: 18px; /* Увеличенный текст */
+  font-weight: bold;
+  text-transform: uppercase; /* Заглавные буквы */
+  cursor: pointer;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4), 0 2px 4px rgba(0, 0, 0, 0.2); /* Глубокая тень */
+  transition: transform 0.2s ease, background 0.3s ease;
+}
+
+.mix-button:hover {
+  transform: scale(1.05); /* Легкое увеличение */
+  background: linear-gradient(145deg, #ffbf00, #6a3908); /* Темный зеленый */
+}
+
+.mix-button:focus {
+  outline: none; /* Убираем стандартное выделение */
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .mahjong-board {
+    width: 90%;
+  }
+
+  .card {
+    aspect-ratio: 1; /* Карточки остаются квадратными */
+  }
+
+  .mix-button {
+    font-size: 16px;
+    padding: 10px 20px;
+  }
+}

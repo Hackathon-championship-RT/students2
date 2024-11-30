@@ -37,7 +37,7 @@ async def get_results(
     for result in results:
         result.username = result.user.username
 
-    results = sorted(results, key=lambda r: -r.score)[:limit]
+    results = sorted(results, key=lambda r: (-r.level, -r.score))[:limit]
     return [ResultSchema.model_validate(result) for result in results]
 
 
