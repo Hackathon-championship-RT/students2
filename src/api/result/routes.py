@@ -2,8 +2,10 @@ import logging
 
 from fastapi import APIRouter, Depends, Response, status
 
+from src.api.auth.auth import get_current_user
 from src.api.result.shemas import ResultSchema
 from src.bootstrap import Bootstrap
+from src.db.models import User
 from src.domain.models import ResultData
 from src.servises.result_service import (
     DeleteResultsService,
@@ -19,6 +21,7 @@ router = APIRouter()
 async def new_result(
     result: ResultData,
     result_service: InsertResultService = Depends(InsertResultService),
+    user: User = Depends(get_current_user),
 ):
     await result_service(result_data=result, uow=Bootstrap.bootstraped.uow_partial())
     logging.info(f"New result for {result.username} inserted")

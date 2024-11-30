@@ -9,5 +9,4 @@ class UserData(BaseModel):
 class ResultData(BaseModel):
     username: str
     level: int
-    time: int
-    shuffles: int
+    score: int

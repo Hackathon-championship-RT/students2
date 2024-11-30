@@ -10,8 +10,7 @@ class InsertResultService:
             return await uow.result_repository.insert_result(
                 result_data.username,
                 result_data.level,
-                result_data.time,
-                result_data.shuffles,
+                result_data.score,
             )
 
 

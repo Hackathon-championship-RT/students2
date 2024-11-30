@@ -11,8 +11,7 @@ class Result(Base):
         BigInteger, primary_key=True, autoincrement=True, index=True
     )
     level: Mapped[int]
-    time: Mapped[int]
-    shuffles: Mapped[int]
+    score: Mapped[int]
     user_id: Mapped[int] = mapped_column(ForeignKey("users.id"))
 
     user: Mapped["User"] = relationship("User", back_populates="results", lazy="joined")

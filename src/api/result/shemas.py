@@ -3,8 +3,8 @@ from pydantic import BaseModel
 
 class ResultSchema(BaseModel):
     id: int
-    shuffles: int
-    time: int
+    level: int
+    score: int
     user_id: int
 
     class Config:

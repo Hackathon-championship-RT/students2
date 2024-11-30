@@ -12,7 +12,10 @@ from src.db.models import Result, User
 class AbstractResultRepository(ABC):
     @abstractmethod
     async def insert_result(
-        self, username: str, level: int, time: int, shuffles: int
+        self,
+        username: str,
+        level: int,
+        score: int,
     ) -> None:
         raise NotImplementedError()
 
@@ -34,7 +37,10 @@ class ResultRepository(AbstractResultRepository):
         self.session = session
 
     async def insert_result(
-        self, username: str, level: int, time: int, shuffles: int
+        self,
+        username: str,
+        level: int,
+        score: int,
     ) -> None:
         async with self.session as session:
             result = await session.execute(
@@ -45,7 +51,7 @@ class ResultRepository(AbstractResultRepository):
             if not user:
                 raise ValueError(f"User with username '{username}' does not exist.")
 
-            new_result = Result(level=level, time=time, shuffles=shuffles, user=user)
+            new_result = Result(level=level, score=score, user=user)
             session.add(new_result)
             await session.commit()
 
