@@ -20,6 +20,11 @@
 
 ## Running
 
+Create .env file
+```bash
+cp .env-example, .env
+```
+
 ### With Docker:
 ```bash
 docker-compose -f docker-compose.local.yaml up
@@ -43,6 +48,8 @@ docker-compose -f docker-compose.local.yaml up
     ```bash
     poetry run python src/api/webserver.py
     ```
+
+
 
 ### Locally via make:
 ```bash

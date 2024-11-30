@@ -23,8 +23,8 @@ async def new_result(
     result_service: InsertResultService = Depends(InsertResultService),
     user: User = Depends(get_current_user),
 ):
-    await result_service(result_data=result, uow=Bootstrap.bootstraped.uow_partial())
-    logging.info(f"New result for {result.username} inserted")
+    await result_service(result_data=result, username=user.username, uow=Bootstrap.bootstraped.uow_partial())
+    logging.info(f"New result for {user.username} inserted")
     return Response(status_code=status.HTTP_201_CREATED)
 
 

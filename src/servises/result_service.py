@@ -5,10 +5,10 @@ from src.servises.uow import AbstractUnitOfWork
 
 
 class InsertResultService:
-    async def __call__(self, result_data: ResultData, uow: AbstractUnitOfWork):
+    async def __call__(self, result_data: ResultData, username: str, uow: AbstractUnitOfWork):
         async with uow:
             return await uow.result_repository.insert_result(
-                result_data.username,
+                username,
                 result_data.level,
                 result_data.score,
             )
