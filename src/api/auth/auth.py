@@ -7,7 +7,7 @@ from fastapi import Depends, HTTPException, Security
 from fastapi.security import APIKeyHeader
 
 from src.api.auth.schemas import TokenData
-from src.api.auth.schemas import UserData as User
+from src.api.auth.schemas import UserData
 from src.bootstrap import Bootstrap
 from src.servises.authentication import GetUser
 
@@ -32,7 +32,7 @@ async def get_current_user(
         APIKeyHeader(name="Authorization", auto_error=False)
     ),
     get_user: GetUser = Depends(GetUser),
-) -> User:
+) -> UserData:
     credentials_exception = HTTPException(
         status_code=401,
         detail="Could not validate credentials",

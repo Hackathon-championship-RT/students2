@@ -33,8 +33,7 @@ async def get_results(
     limit: int, result_service: GetAllResultsService = Depends(GetAllResultsService)
 ):
     results = await result_service(uow=Bootstrap.bootstraped.uow_partial())
-    results.sort(key=lambda r: (-r.level, r.time, r.shuffles))
-    results = results[:limit]
+    results = sorted(results, key=lambda r: -r.score)[:limit]
     return [ResultSchema.model_validate(result) for result in results]
 
 

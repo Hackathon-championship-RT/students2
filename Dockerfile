@@ -30,6 +30,8 @@ ENV PYTHONPATH=${WORKDIR}:${PYTHONPATH}
 COPY poetry.lock pyproject.toml ./
 RUN poetry install --only main --no-root
 
+COPY alembic alembic
+COPY alembic.ini alembic.ini
 COPY src ${WORKDIR}/src
 RUN tree .
 

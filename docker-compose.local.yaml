@@ -17,3 +17,15 @@ services:
       - .env
     ports:
       - 8080:8080
+
+  alembic:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    entrypoint: ["alembic"]
+    command: ["upgrade", "head"]
+    depends_on:
+      - postgres
+    env_file:
+      - .env
+

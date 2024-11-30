@@ -29,7 +29,7 @@ class UnitOfWork(AbstractUnitOfWork):
     def __init__(self, db_adapter: SQLAlchemyAdapter) -> None:
         self.client_db_adapter = db_adapter
         self.user_repository: AbstractUserRepository
-        self.scoreboard_repository: AbstractResultRepository
+        self.result_repository: AbstractResultRepository
         self.session: AsyncSession
 
     async def __aenter__(self) -> "UnitOfWork":
@@ -37,7 +37,7 @@ class UnitOfWork(AbstractUnitOfWork):
         if not self.session:
             raise ValueError("Failed to initialize session")
         self.user_repository = UserRepository(session=self.session)
-        self.scoreboard_repository = ResultRepository(session=self.session)
+        self.result_repository = ResultRepository(session=self.session)
         return self
 
     async def __aexit__(self, exc_type, exc_value, traceback) -> None:
