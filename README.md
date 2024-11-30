@@ -20,6 +20,7 @@
 
 ## Running
 
+### Backend:
 Create .env file
 ```bash
 cp .env-example, .env
@@ -55,3 +56,13 @@ make start
 ```
 
 To run from Docker set `POSTGRES_HOST = postgres`, `localhost` otherwise
+
+### Frontend:
+1. Install dependencies
+   ```bash
+   npm install
+   ```
+2. Run app
+   ```bash
+   npm start
+   ```
