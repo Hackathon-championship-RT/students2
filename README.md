@@ -22,7 +22,7 @@
 
 ### With Docker:
 ```bash
-  docker-compose -f docker-compose.local.yaml up
+docker-compose -f docker-compose.local.yaml up
 ```
 
 ### Locally:
@@ -43,3 +43,8 @@
     ```bash
     poetry run python src/api/webserver.py
     ```
+
+### Locally via make:
+```bash
+make start
+```

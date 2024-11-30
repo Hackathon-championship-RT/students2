@@ -40,6 +40,14 @@ class UserRepository(AbstractUserRepository):
             db_users = result.unique().scalar_one_or_none()
             return self._to_user_data(db_users)
 
+    async def get_user_by_id(self, user_id: int) -> Optional[UserData]:
+        async with self.session as session:
+            result = await session.execute(
+                select(User).where(User.id == user_id)
+            )
+            db_users = result.unique().scalar_one_or_none()
+            return self._to_user_data(db_users)
+
     async def get_users(self) -> List[UserData | None]:
         async with self.session as session:
             result = await session.execute(select(User))

@@ -33,6 +33,10 @@ async def get_results(
     limit: int, result_service: GetAllResultsService = Depends(GetAllResultsService)
 ):
     results = await result_service(uow=Bootstrap.bootstraped.uow_partial())
+
+    for result in results:
+        result.username = result.user.username
+
     results = sorted(results, key=lambda r: -r.score)[:limit]
     return [ResultSchema.model_validate(result) for result in results]
 

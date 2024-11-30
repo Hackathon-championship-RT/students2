@@ -6,6 +6,7 @@ class ResultSchema(BaseModel):
     level: int
     score: int
     user_id: int
+    username: str
 
     class Config:
         from_attributes = True
