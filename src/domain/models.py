@@ -7,6 +7,5 @@ class UserData(BaseModel):
 
 
 class ResultData(BaseModel):
-    username: str
     level: int
     score: int
