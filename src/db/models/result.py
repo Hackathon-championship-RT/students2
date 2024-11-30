@@ -7,7 +7,9 @@ from src.db.models.base import Base
 class Result(Base):
     __tablename__ = "results"
 
-    id: Mapped[int] = mapped_column(BigInteger, primary_key=True, autoincrement=True, index=True)
+    id: Mapped[int] = mapped_column(
+        BigInteger, primary_key=True, autoincrement=True, index=True
+    )
     level: Mapped[int]
     time: Mapped[int]
     shuffles: Mapped[int]

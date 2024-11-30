@@ -1,48 +1,51 @@
 from abc import ABC, abstractmethod
-from contextlib import asynccontextmanager
+from typing import Any
+
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from src.db.repositories.user import UserRepository
-from src.db.repositories.result import ResultRepository
+from src.api.adapters import SQLAlchemyAdapter
+from src.db.repositories import (
+    AbstractResultRepository,
+    AbstractUserRepository,
+    ResultRepository,
+    UserRepository,
+)
 
 
 class AbstractUnitOfWork(ABC):
-    @abstractmethod
-    @asynccontextmanager
-    def start(self):
-        raise NotImplementedError()
+    user_repository: AbstractUserRepository
+    result_repository: AbstractResultRepository
 
-    @property
     @abstractmethod
-    def users(self):
-        raise NotImplementedError()
+    def __aenter__(self) -> Any:
+        raise NotImplementedError
+
+    @abstractmethod
+    def __aexit__(self, *args) -> Any:
+        raise NotImplementedError
 
 
 class UnitOfWork(AbstractUnitOfWork):
-    def __init__(self, session_factory):
-        self.session_factory = session_factory
-        self._session: AsyncSession | None = None
+    def __init__(self, db_adapter: SQLAlchemyAdapter) -> None:
+        self.client_db_adapter = db_adapter
+        self.user_repository: AbstractUserRepository
+        self.scoreboard_repository: AbstractResultRepository
+        self.session: AsyncSession
 
-    @asynccontextmanager
-    async def start(self):
-        self._session = self.session_factory()
-        try:
-            yield self
-            await self._session.commit()
-        except Exception:
-            await self._session.rollback()
-            raise
-        finally:
-            await self._session.close()
+    async def __aenter__(self) -> "UnitOfWork":
+        self.session = self.client_db_adapter.sessionmaker()
+        if not self.session:
+            raise ValueError("Failed to initialize session")
+        self.user_repository = UserRepository(session=self.session)
+        self.scoreboard_repository = ResultRepository(session=self.session)
+        return self
 
-    @property
-    def users(self) -> UserRepository:
-        if not self._session:
-            raise RuntimeError("UnitOfWork must be started before accessing repositories.")
-        return UserRepository(self._session)
-
-    @property
-    def results(self) -> ResultRepository:
-        if not self._session:
-            raise RuntimeError("UnitOfWork must be started before accessing repositories.")
-        return ResultRepository(self._session)
+    async def __aexit__(self, exc_type, exc_value, traceback) -> None:
+        if self.session:
+            try:
+                if exc_type is None:
+                    await self.session.commit()
+                else:
+                    await self.session.rollback()
+            finally:
+                await self.session.close()

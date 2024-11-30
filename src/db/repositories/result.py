@@ -1,3 +1,4 @@
+from abc import ABC, abstractmethod
 from typing import List
 
 from sqlalchemy import delete
@@ -8,13 +9,37 @@ from sqlalchemy.orm import selectinload
 from src.db.models import Result, User
 
 
-class ResultRepository:
+class AbstractResultRepository(ABC):
+    @abstractmethod
+    async def insert_result(
+        self, username: str, level: int, time: int, shuffles: int
+    ) -> None:
+        raise NotImplementedError()
+
+    @abstractmethod
+    async def get_all_results(self) -> List[Result]:
+        raise NotImplementedError()
+
+    @abstractmethod
+    async def get_user_results(self, username: str) -> List[Result]:
+        raise NotImplementedError()
+
+    @abstractmethod
+    async def delete_results(self) -> None:
+        raise NotImplementedError()
+
+
+class ResultRepository(AbstractResultRepository):
     def __init__(self, session: AsyncSession):
         self.session = session
 
-    async def insert_result(self, username: str, level: int, time: int, shuffles: int) -> None:
+    async def insert_result(
+        self, username: str, level: int, time: int, shuffles: int
+    ) -> None:
         async with self.session as session:
-            result = await session.execute(select(User).where(User.username == username))
+            result = await session.execute(
+                select(User).where(User.username == username)
+            )
             user = result.unique().scalar_one_or_none()
 
             if not user:
@@ -26,7 +51,9 @@ class ResultRepository:
 
     async def get_all_results(self) -> List[Result]:
         async with self.session as session:
-            result = await session.execute(select(Result).options(selectinload(Result.user)))
+            result = await session.execute(
+                select(Result).options(selectinload(Result.user))
+            )
             return result.unique().scalars().all()
 
     async def get_user_results(self, username: str) -> List[Result]:
@@ -42,8 +69,6 @@ class ResultRepository:
 
     async def delete_results(self) -> None:
         async with self.session as session:
-            query = (
-                delete(Result)
-            )
+            query = delete(Result)
             await session.execute(query)
             await session.commit()
