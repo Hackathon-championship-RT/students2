@@ -28,7 +28,7 @@ class Config:
             self.DATABASE_PORT: int = int(os.environ["POSTGRES_PORT"])
             self.DATABASE_USER: str = os.environ["POSTGRES_USER"]
             self.DATABASE_PASSWORD: str = os.environ["POSTGRES_PASSWORD"]
-            self.DATABASE_URL: str = f"postgresql+psycopg2://{self.DATABASE_USER}:{self.DATABASE_PASSWORD}@{self.DATABASE_HOST}:{self.DATABASE_PORT}/postgres"
+            self.DATABASE_URL: str = f"postgresql+asyncpg://{self.DATABASE_USER}:{self.DATABASE_PASSWORD}@{self.DATABASE_HOST}:{self.DATABASE_PORT}/postgres"
         except KeyError:
             logging.exception("Database environment variable(s) not set!")
             raise

@@ -4,8 +4,7 @@ from typing import Any, Callable
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker
 
 from src.config import Config
 from src.servises.uow import UnitOfWork
@@ -28,8 +27,8 @@ class Bootstrap:
         logging.info("BOOTSTRAPPING - UoW")
 
         def uow_partial() -> UnitOfWork:
-            engine = create_engine(config.DATABASE_URL)
-            session_factory = sessionmaker(bind=engine)
+            engine = create_async_engine(config.DATABASE_URL)
+            session_factory = async_sessionmaker(bind=engine)
 
             return UnitOfWork(session_factory=session_factory)
 
@@ -50,7 +49,7 @@ class Bootstrap:
     def bootstrap_fastapi(config: Config) -> FastAPI:
         logging.debug("BOOTSTRAPPING - fast api")
         fast_api = FastAPI(
-            title=f"SVETA API {config.API_VERSION}",
+            title=f"AutoMahjong API {config.API_VERSION}",
             description=config.API_DESCRIPTION,
             root_path="/api",
             docs_url="/docs",

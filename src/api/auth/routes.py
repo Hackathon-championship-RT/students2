@@ -1,13 +1,14 @@
 import logging
 
 import jwt
-from fastapi import APIRouter, Depends, HTTPException, Request, Security
+from fastapi import APIRouter, Depends, HTTPException, Request, Security, Response, status
 from fastapi.security import APIKeyHeader
 
 from src.bootstrap import Bootstrap
 from src.domain.models import UserData
 from src.servises.authentication import SignInService, SignUpService, TokenService
 from src.servises.user_service import GetUsers
+from src.api.auth.schemas import UserSchema
 
 router = APIRouter()
 
@@ -17,8 +18,8 @@ async def signup(
     user_data: UserData, auth_service: SignUpService = Depends(SignUpService)
 ):
     await auth_service(user_data=user_data, uow=Bootstrap.bootstraped.uow_partial())
-    raise HTTPException(
-        status_code=200,
+    return Response(
+        status_code=status.HTTP_201_CREATED,
     )
 
 
@@ -31,19 +32,20 @@ async def signin(
         user_data=user_data, uow=Bootstrap.bootstraped.uow_partial()
     )
 
-    if status:
-        logging.info("user %s has loged in", user_data.username)
-        raise HTTPException(
-            status_code=200,
-        )
-    else:
+    if not status:
         logging.info("user %s has not loged in", user_data.username)
         raise HTTPException(status_code=401, detail="Incorrect username or password")
+
+    logging.info("user %s has loged in", user_data.username)
+    return Response(
+        status_code=200,
+    )
 
 
 @router.get("/users")
 async def users(users_service: GetUsers = Depends(GetUsers)):
-    return await users_service(uow=Bootstrap.bootstraped.uow_partial())
+    users = await users_service(uow=Bootstrap.bootstraped.uow_partial())
+    return [UserSchema.model_validate(user) for user in users]
 
 
 async def check_access_token(

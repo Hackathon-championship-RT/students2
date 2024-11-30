@@ -16,7 +16,7 @@ RUN groupadd -g 1001 sveta && useradd -u 1001 -m sveta -g sveta -d ${WORKDIR}
 
 ENV POETRY_VERSION 1.6.1
 ENV POETRY_HOME=/home/sveta/poetry
-RUN curl -sSL https://install.python-poetry.org | POETRY_HOME=${POETRY_HOME} python - --version "$POETRY_VERSION"
+RUN curl -sSL https://install.python-poetry.org | POETRY_HOME=${POETRY_HOME} python - --version $POETRY_VERSION
 ENV PATH ${POETRY_HOME}/bin:$PATH
 
 RUN ${POETRY_HOME}/bin/poetry config virtualenvs.create false

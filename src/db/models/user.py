@@ -9,9 +9,8 @@ from src.db.models.base import Base
 class User(Base):
     __tablename__ = "users"
 
-    id: Mapped[int] = mapped_column(BigInteger, primary_key=True)
-    username: Mapped[str] = mapped_column(String, unique=True, nullable=False)
+    id: Mapped[int] = mapped_column(BigInteger, primary_key=True, autoincrement=True, index=True)
+    username: Mapped[str] = mapped_column(String, unique=True, nullable=False, index=True)
     password: Mapped[str] = mapped_column(String, nullable=False)
-    token: Mapped[str] = mapped_column(String, nullable=True)
 
     results: Mapped[List["Result"]] = relationship(back_populates="user", lazy="joined")

@@ -10,7 +10,7 @@ from src.servises.uow import UnitOfWork
 
 class SignUpService:
     async def __call__(self, user_data: UserData, uow: UnitOfWork) -> None:
-        with uow.start() as uow_session:
+        async with uow.start() as uow_session:
             logging.debug("Registring: %s", str(user_data))
             username, password = user_data.username, user_data.password
 
@@ -19,11 +19,11 @@ class SignUpService:
 
 class SignInService:
     async def __call__(self, user_data: UserData, uow: UnitOfWork) -> str | bool:
-        with uow.start() as uow_session:
+        async with uow.start() as uow_session:
             logging.debug("Sign in: %s", str(user_data))
             username = user_data.username
 
-            result = await uow_session.users.get_userdata_by_username(username)
+            result = await uow_session.users.get_user_by_username(username)
             if not result or user_data.password != result.password:
                 return False
             token = jwt.encode(
@@ -38,6 +38,6 @@ class SignInService:
 
 class TokenService:
     async def __call__(self, username: str, uow: UnitOfWork) -> Optional["User"]:
-        with uow.start() as uow_session:
-            result = await uow_session.users.get_userdata_by_username(username)
+        async with uow.start() as uow_session:
+            result = await uow_session.users.get_user_by_username(username)
             return result
