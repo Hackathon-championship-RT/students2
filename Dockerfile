@@ -1,22 +1,33 @@
 FROM ubuntu:24.04 AS base_image
 ENV DEBIAN_FRONTEND noninteractive
-WORKDIR /home/sveta
-ENV WORKDIR=/home/sveta
+WORKDIR /home/project
+ENV WORKDIR=/home/project
 
-RUN apt-get update && apt-get -y --no-install-recommends install software-properties-common
-
-RUN apt-get -y --no-install-recommends install \
-    make git sudo curl wget build-essential unattended-upgrades \
-    libssl-dev zlib1g-dev libbz2-dev libreadline-dev python3-full tree python3-pip
-
-RUN update-alternatives --install /usr/bin/python python /usr/bin/python3 10
-
-RUN groupadd -g 1001 sveta && useradd -u 1001 -m sveta -g sveta -d ${WORKDIR}
+RUN apt-get update && apt-get -y --no-install-recommends install software-properties-common  \
+&& apt-get clean \
+&& apt-get -y --no-install-recommends install \
+    build-essential  \
+    curl  \
+    git  \
+    libbz2-dev  \
+    libreadline-dev  \
+    libssl-dev  \
+    make  \
+    python3-full  \
+    python3-pip  \
+    sudo  \
+    tree  \
+    unattended-upgrades \
+    wget  \
+    zlib1g-dev  \
+&& apt-get clean \
+&& update-alternatives --install /usr/bin/python python /usr/bin/python3 10 \
+&& groupadd -g 1001 project && useradd -u 1001 -m project -g project -d ${WORKDIR}
 
 
 ENV POETRY_VERSION 1.6.1
-ENV POETRY_HOME=/home/sveta/poetry
-RUN curl -sSL https://install.python-poetry.org | POETRY_HOME=${POETRY_HOME} python - --version $POETRY_VERSION
+ENV POETRY_HOME=/home/project/poetry
+RUN curl -sSL https://install.python-poetry.org | POETRY_HOME=${POETRY_HOME} python - --version "$POETRY_VERSION"
 ENV PATH ${POETRY_HOME}/bin:$PATH
 
 RUN ${POETRY_HOME}/bin/poetry config virtualenvs.create false
